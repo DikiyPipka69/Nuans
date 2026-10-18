@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Нюанс — студия красоты</title>
+  <meta name="description" content="Демо-сайт студии красоты: маникюр, брови, ресницы, макияж.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💄%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <noscript><link rel="stylesheet" href="/static/css/noscript.css"></noscript>
+</head>
+<body>
+  <div class="note">Демо-сайт: бренд, мастера и контакты вымышлены. Не вводите в форму реальные данные.</div>
+
+  <header>
+    <div class="wrap bar">
+      <a class="logo" href="#/home">Нюанс</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Меню</button>
+      <nav id="menu" aria-label="Основное меню">
+        <a href="#/home" data-nav="home">Главная</a>
+        <a href="#/services" data-nav="services">Услуги и цены</a>
+        <a href="#/masters" data-nav="masters">Мастера</a>
+        <a href="#/contacts" data-nav="contacts">Контакты</a>
+        <a class="btn sm" href="#/contacts">Записаться</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="page" id="p-home">
+      <div class="hero">
+        <div>
+          <h1>Ваш оттенок. Наша работа.</h1>
+          <p class="lead">Маникюр, брови, ресницы и макияж в центре города. Запись за минуту, без звонков.</p>
+          <div class="cta">
+            <a class="btn" href="#/contacts">Записаться онлайн</a>
+            <a class="btn ghost" href="#/services">Услуги и цены</a>
+          </div>
+          <div class="pick">
+            <p id="pick-label">Выберите оттенок и посмотрите, как меняется сайт</p>
+            <div class="dots" role="radiogroup" aria-labelledby="pick-label" id="dots"></div>
+          </div>
+        </div>
+        <div class="swatch" aria-live="polite"><span id="swatch-name">Малина</span></div>
+      </div>
+
+      <div class="sec">
+        <h2>Чем мы отличаемся</h2>
+        <div class="grid3">
+          <div class="card"><h3>Стерильность</h3><p>Инструменты проходят обработку на ваших глазах, расходники одноразовые.</p></div>
+          <div class="card"><h3>Точное время</h3><p>Запись по часам: вы не ждёте в очереди, мастер не торопится.</p></div>
+          <div class="card"><h3>Честная цена</h3><p>Стоимость в прайсе совпадает с чеком, без доплат за мелочи.</p></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2>Отзывы</h2>
+        <p class="sub">Примеры: в реальном проекте здесь отзывы клиентов.</p>
+        <div class="quotes">
+          <blockquote>Записалась с телефона за минуту. Маникюр держится уже третью неделю.<footer>Анна</footer></blockquote>
+          <blockquote>Объяснили, что подойдёт мне, и ничего лишнего не навязывали.<footer>Мария</footer></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="p-services">
+      <h1>Услуги и цены</h1>
+      <p class="lead">Длительность указана ориентировочно, точное время подтвердит мастер.</p>
+      <div id="services-list">Загружаем прайс…</div>
+      <a class="btn" href="#/contacts">Записаться</a>
+    </section>
+
+    <section class="page" id="p-masters">
+      <h1>Мастера</h1>
+      <p class="lead">Имена и опыт вымышлены, так будет выглядеть страница вашей команды.</p>
+      <div class="grid3">
+        <div class="card"><div class="av">АК</div><h3>Анна К.</h3><p>Маникюр и педикюр. Опыт 7 лет.</p></div>
+        <div class="card"><div class="av">ИС</div><h3>Ирина С.</h3><p>Брови и ресницы. Опыт 5 лет.</p></div>
+        <div class="card"><div class="av">ЮМ</div><h3>Юлия М.</h3><p>Макияж и укладки. Опыт 9 лет.</p></div>
+      </div>
+    </section>
+
+    <section class="page" id="p-contacts">
+      <h1>Запись и контакты</h1>
+      <div class="two mt">
+        <div>
+          <h2>Записаться</h2>
+          <form id="lead-form" novalidate>
+            <label>Ваше имя<input id="f-name" autocomplete="given-name" maxlength="60"></label>
+            <label>Телефон<input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" maxlength="30"></label>
+            <label>Услуга<select id="f-service"></select></label>
+            <div class="hp" aria-hidden="true"><label>Сайт<input id="f-website" tabindex="-1" autocomplete="off"></label></div>
+            <label class="check"><input type="checkbox" id="f-consent"><span>Согласен на обработку персональных данных, <a href="#/privacy">политика конфиденциальности</a></span></label>
+            <div class="err" id="form-error" role="alert"></div>
+            <button class="btn" type="submit" id="submit-btn">Отправить заявку</button>
+          </form>
+          <div class="ok" id="form-ok" hidden><b>Заявка принята.</b><br>Это демо: мастер вам не позвонит. Заявка сохранена в базе проекта и видна владельцу в закрытой админке.</div>
+        </div>
+        <div>
+          <h2>Как нас найти</h2>
+          <dl>
+            <dt>Адрес</dt><dd>г. Ваш город, ул. Примерная, 10</dd>
+            <dt>Часы работы</dt><dd>Ежедневно, 10:00 – 21:00</dd>
+            <dt>Телефон</dt><dd>+7 900 000-00-00</dd>
+            <dt>Telegram</dt><dd>@nuance_demo</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="sec">
+        <h2>Частые вопросы</h2>
+        <details><summary>Можно ли перенести запись?</summary><p>Да, напишите нам не позднее чем за 3 часа до визита.</p></details>
+        <details><summary>Что если я опаздываю?</summary><p>Предупредите мастера. Если опоздание больше 15 минут, время услуги сократится.</p></details>
+        <details><summary>Как оплатить?</summary><p>Наличными или картой в студии, цена та же, что в прайсе.</p></details>
+      </div>
+    </section>
+
+    <section class="page" id="p-privacy">
+      <h1>Политика конфиденциальности</h1>
+      <p class="lead">Демо-страница. В реальном проекте здесь размещается текст политики, подготовленный для конкретной компании: какие данные собираются, зачем, где хранятся и как их удалить.</p>
+    </section>
+
+  </main>
+
+  <footer class="f">
+    <div class="wrap"><a href="#/privacy">Политика конфиденциальности</a>Концепт сайта для студии красоты. Хотите такой же? Напишите автору.</div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

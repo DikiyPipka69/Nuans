@@ -1,0 +1,2 @@
+/* Если в браузере отключён JavaScript, показываем все страницы подряд */
+.page { display: block !important; }
