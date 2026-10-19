@@ -1,4 +1,4 @@
-"""Демо-сайт студии красоты «Нюанс»: FastAPI + SQLite + Telegram."""
+"""Демо-сайт студии красоты «Нюанс»: FastAPI + SQLite."""
 import html
 import json
 import os
@@ -8,14 +8,14 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from dotenv import load_dotenv
-from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from . import db, ratelimit, telegram
+from . import db, ratelimit
 
 load_dotenv()  # читает .env при локальном запуске; на Render переменные задаются в панели
 
@@ -108,14 +108,13 @@ def services():
 
 
 @app.post("/api/lead")
-def create_lead(lead: Lead, request: Request, background: BackgroundTasks):
+def create_lead(lead: Lead, request: Request):
     if lead.website:  # заполнил бот: делаем вид, что всё хорошо, ничего не сохраняя
         return {"ok": True}
     ip = request.client.host if request.client else "unknown"
     if not ratelimit.allow(ip):
         raise HTTPException(status_code=429, detail="Слишком много заявок, попробуйте позже")
     db.add_lead(lead.name, lead.phone, lead.service)
-    background.add_task(telegram.notify, lead.name, lead.phone, lead.service)
     return {"ok": True}
 
 

@@ -15,10 +15,9 @@ VALID = {
 
 @pytest.fixture
 def client(tmp_path, monkeypatch):
-    # Свежая база на каждый тест и никаких настоящих токенов из .env
+    # Свежая база на каждый тест и без пароля админки из .env
     monkeypatch.setenv("DB_PATH", str(tmp_path / "test.db"))
-    for var in ("ADMIN_PASSWORD", "BOT_TOKEN", "CHAT_ID"):
-        monkeypatch.delenv(var, raising=False)
+    monkeypatch.delenv("ADMIN_PASSWORD", raising=False)
     ratelimit.reset()
     with TestClient(app) as c:
         yield c

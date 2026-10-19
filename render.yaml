@@ -11,7 +11,3 @@ services:
         value: 3.12.8
       - key: ADMIN_PASSWORD
         sync: false   # Render спросит значение при создании, в Git его нет
-      - key: BOT_TOKEN
-        sync: false
-      - key: CHAT_ID
-        sync: false
