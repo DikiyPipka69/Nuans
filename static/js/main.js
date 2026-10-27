@@ -13,7 +13,7 @@ function setShade(index) {
   document.documentElement.style.setProperty("--accent", SHADES[index][1]);
   document.getElementById("swatch-name").textContent = SHADES[index][0];
   [...dotsBox.children].forEach((btn, i) => {
-    btn.setAttribute("aria-checked", i === index ? "true" : "false");
+    btn.setAttribute("aria-pressed", i === index ? "true" : "false");
   });
 }
 
@@ -22,7 +22,6 @@ SHADES.forEach(([name, color], i) => {
   btn.type = "button";
   btn.className = "dot";
   btn.style.background = color;
-  btn.setAttribute("role", "radio");
   btn.setAttribute("aria-label", name);
   btn.addEventListener("click", () => setShade(i));
   dotsBox.appendChild(btn);
@@ -102,6 +101,19 @@ const form = document.getElementById("lead-form");
 const errorBox = document.getElementById("form-error");
 const submitBtn = document.getElementById("submit-btn");
 
+// Одноразовый токен формы: без него сервер заявку не принимает (защита от ботов).
+// Берём его сразу при загрузке страницы, а после любой неудачной отправки берём новый.
+let formToken = "";
+async function refreshToken() {
+  try {
+    const res = await fetch("/api/form-token");
+    if (res.ok) formToken = (await res.json()).token;
+  } catch {
+    formToken = "";
+  }
+}
+refreshToken();
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const name = document.getElementById("f-name").value.trim();
@@ -115,27 +127,38 @@ form.addEventListener("submit", async (event) => {
   if (!service) { errorBox.textContent = "Прайс ещё не загрузился, подождите секунду."; return; }
   if (!consent) { errorBox.textContent = "Поставьте галочку согласия, иначе заявку отправить нельзя."; return; }
 
+  if (!formToken) await refreshToken();
   errorBox.textContent = "";
   submitBtn.disabled = true;
+  submitBtn.setAttribute("aria-busy", "true");
   submitBtn.textContent = "Отправляем…";
   try {
     const res = await fetch("/api/lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, service, consent, website }),
+      body: JSON.stringify({ name, phone, service, consent, website, token: formToken }),
     });
-    if (res.status === 429) {
-      errorBox.textContent = "Слишком много заявок. Попробуйте позже.";
-    } else if (!res.ok) {
-      errorBox.textContent = "Проверьте введённые данные.";
-    } else {
+    if (res.ok) {
       form.hidden = true;
       document.getElementById("form-ok").hidden = false;
+      return;
     }
+    formToken = "";  // токен одноразовый
+    if (res.status === 429) {
+      errorBox.textContent = "Слишком много запросов. Подождите минуту и попробуйте снова.";
+    } else if (res.status === 400) {
+      errorBox.textContent = "Форма устарела или отправлена слишком быстро. Подождите секунду и нажмите «Отправить» ещё раз.";
+    } else {
+      errorBox.textContent = "Проверьте введённые данные.";
+    }
+    refreshToken();
   } catch {
     errorBox.textContent = "Нет связи с сервером. Попробуйте ещё раз.";
+    formToken = "";
+    refreshToken();
   } finally {
     submitBtn.disabled = false;
+    submitBtn.removeAttribute("aria-busy");
     submitBtn.textContent = "Отправить заявку";
   }
 });

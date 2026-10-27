@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
   <title>Нюанс — студия красоты</title>
   <meta name="description" content="Демо-сайт студии красоты: маникюр, брови, ресницы, макияж.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💄%3C/text%3E%3C/svg%3E">
@@ -10,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/motion.css">
+  <script src="/static/js/motion.js"></script>
   <noscript><link rel="stylesheet" href="/static/css/noscript.css"></noscript>
 </head>
 <body>
@@ -32,7 +35,7 @@
   <main class="wrap">
 
     <section class="page" id="p-home">
-      <div class="hero">
+      <div class="hero stagger">
         <div>
           <h1>Ваш оттенок. Наша работа.</h1>
           <p class="lead">Маникюр, брови, ресницы и макияж в центре города. Запись за минуту, без звонков.</p>
@@ -42,25 +45,25 @@
           </div>
           <div class="pick">
             <p id="pick-label">Выберите оттенок и посмотрите, как меняется сайт</p>
-            <div class="dots" role="radiogroup" aria-labelledby="pick-label" id="dots"></div>
+            <div class="dots" role="group" aria-labelledby="pick-label" id="dots"></div>
           </div>
         </div>
         <div class="swatch" aria-live="polite"><span id="swatch-name">Малина</span></div>
       </div>
 
-      <div class="sec">
+      <div class="sec reveal">
         <h2>Чем мы отличаемся</h2>
-        <div class="grid3">
+        <div class="grid3 stagger">
           <div class="card"><h3>Стерильность</h3><p>Инструменты проходят обработку на ваших глазах, расходники одноразовые.</p></div>
           <div class="card"><h3>Точное время</h3><p>Запись по часам: вы не ждёте в очереди, мастер не торопится.</p></div>
           <div class="card"><h3>Честная цена</h3><p>Стоимость в прайсе совпадает с чеком, без доплат за мелочи.</p></div>
         </div>
       </div>
 
-      <div class="sec">
+      <div class="sec reveal">
         <h2>Отзывы</h2>
         <p class="sub">Примеры: в реальном проекте здесь отзывы клиентов.</p>
-        <div class="quotes">
+        <div class="quotes stagger">
           <blockquote>Записалась с телефона за минуту. Маникюр держится уже третью неделю.<footer>Анна</footer></blockquote>
           <blockquote>Объяснили, что подойдёт мне, и ничего лишнего не навязывали.<footer>Мария</footer></blockquote>
         </div>
@@ -70,14 +73,14 @@
     <section class="page" id="p-services">
       <h1>Услуги и цены</h1>
       <p class="lead">Длительность указана ориентировочно, точное время подтвердит мастер.</p>
-      <div id="services-list">Загружаем прайс…</div>
+      <div id="services-list" class="stagger">Загружаем прайс…</div>
       <a class="btn" href="#/contacts">Записаться</a>
     </section>
 
     <section class="page" id="p-masters">
       <h1>Мастера</h1>
       <p class="lead">Имена и опыт вымышлены, так будет выглядеть страница вашей команды.</p>
-      <div class="grid3">
+      <div class="grid3 stagger">
         <div class="card"><div class="av">АК</div><h3>Анна К.</h3><p>Маникюр и педикюр. Опыт 7 лет.</p></div>
         <div class="card"><div class="av">ИС</div><h3>Ирина С.</h3><p>Брови и ресницы. Опыт 5 лет.</p></div>
         <div class="card"><div class="av">ЮМ</div><h3>Юлия М.</h3><p>Макияж и укладки. Опыт 9 лет.</p></div>
@@ -110,7 +113,7 @@
           </dl>
         </div>
       </div>
-      <div class="sec">
+      <div class="sec reveal">
         <h2>Частые вопросы</h2>
         <details><summary>Можно ли перенести запись?</summary><p>Да, напишите нам не позднее чем за 3 часа до визита.</p></details>
         <details><summary>Что если я опаздываю?</summary><p>Предупредите мастера. Если опоздание больше 15 минут, время услуги сократится.</p></details>

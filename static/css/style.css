@@ -99,7 +99,7 @@ nav a.btn { border-bottom: 0; padding: 9px 18px; }
 .pick p { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
 .dots { display: flex; gap: 10px; flex-wrap: wrap; }
 .dot { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--bg); box-shadow: 0 0 0 1.5px var(--line); cursor: pointer; padding: 0; }
-.dot[aria-checked="true"] { box-shadow: 0 0 0 3px var(--ink); }
+.dot[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--ink); }
 
 /* Карточки, мастера, отзывы */
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -164,3 +164,6 @@ th { color: var(--muted); font-weight: 500; font-size: 14px; }
   .swatch { max-width: 230px; order: -1; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- Страница 404 ---------- */
+.nf { padding-top: 72px; padding-bottom: 72px; }
